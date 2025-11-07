@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Brotato - Ultimate Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- MENU GŁÓWNE -->
+  <div id="mainMenu" class="menu active">
+    <h1>⚔️ Mini Brotato Ultimate</h1>
+    
+    <div class="character-selection">
+      <h2>Wybierz Tryb Gry</h2>
+      
+      <div class="player-count">
+        <h3>Liczba graczy:</h3>
+        <div class="count-buttons">
+          <button class="count-btn active" onclick="setPlayerCount(1)">🎮 1 Gracz</button>
+          <button class="count-btn" onclick="setPlayerCount(2)">👥 2 Graczy</button>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    <button onclick="showCharacterTypeMenu()">🎭 Wybór Typu Postaci</button>
+    <button onclick="showSettings()">⚙️ Ustawienia</button>
+    <button onclick="showInstructions()">📖 Instrukcja</button>
+  </div>
+
+  <!-- MENU WYBORU TYPU POSTACI -->
+  <div id="characterTypeMenu" class="menu">
+    <h2>🎭 Wybór Typu Postaci</h2>
+    
+    <div class="character-selection">
+      <h3>Wybierz swoje postacie</h3>
+      
+      <div class="characters-container">
+        <div class="character-option selected" data-character="kuza" onclick="selectCharacter('kuza', 0)">
+          <img src="https://files.catbox.moe/my27pj.png" alt="Kuza">
+          <div class="character-info">
+            <h3>Kuza</h3>
+            <p>HP: 25</p>
+            <p>Broń: Pistolet</p>
+            <p>Specjalne: Szybkie strzały</p>
+            <p>Prędkość: 2.5</p>
+          </div>
+        </div>
+        
+        <div class="character-option" data-character="menel" onclick="selectCharacter('menel', 0)">
+          <img src="https://files.catbox.moe/lpo1ju.png" alt="Menel">
+          <div class="character-info">
+            <h3>Menel</h3>
+            <p>HP: 30</p>
+            <p>Broń: Butelka</p>
+            <p>Specjalne: Mocny rzut</p>
+            <p>Prędkość: 2.2</p>
+            <p>Krytyk: 5%</p>
+          </div>
+        </div>
+        
+        <div class="character-option" data-character="cygan" onclick="selectCharacter('cygan', 0)">
+          <img src="https://files.catbox.moe/qdkj4v.png" alt="Cygan">
+          <div class="character-info">
+            <h3>Cygan</h3>
+            <p>HP: 28</p>
+            <p>Broń: Nóż</p>
+            <p>Specjalne: Kradzież XP</p>
+            <p>Prędkość: 2.8</p>
+            <p>Krytyk: 10%</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="player-count">
+        <h3>Liczba graczy:</h3>
+        <div class="count-buttons">
+          <button class="count-btn active" onclick="setPlayerCount(1)">🎮 1 Gracz</button>
+          <button class="count-btn" onclick="setPlayerCount(2)">👥 2 Graczy</button>
+        </div>
+      </div>
+      
+      <div id="player2SelectionCharacterType" class="player2-selection" style="display: none;">
+        <h3>Wybierz postać dla Gracza 2:</h3>
+        <div class="characters-container">
+          <div class="character-option selected" data-character="kuza" onclick="selectCharacter('kuza', 1)">
+            <img src="https://files.catbox.moe/my27pj.png" alt="Kuza">
+            <div class="character-info">
+              <h3>Kuza</h3>
+              <p>HP: 25</p>
+              <p>Broń: Pistolet</p>
+              <p>Prędkość: 2.5</p>
+            </div>
+          </div>
+          
+          <div class="character-option" data-character="menel" onclick="selectCharacter('menel', 1)">
+            <img src="https://files.catbox.moe/lpo1ju.png" alt="Menel">
+            <div class="character-info">
+              <h3>Menel</h3>
+              <p>HP: 30</p>
+              <p>Broń: Butelka</p>
+              <p>Prędkość: 2.2</p>
+            </div>
+          </div>
+          
+          <div class="character-option" data-character="cygan" onclick="selectCharacter('cygan', 1)">
+            <img src="https://files.catbox.moe/qdkj4v.png" alt="Cygan">
+            <div class="character-info">
+              <h3>Cygan</h3>
+              <p>HP: 28</p>
+              <p>Broń: Nóż</p>
+              <p>Prędkość: 2.8</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    <button onclick="showGame()">🚀 Rozpocznij Grę</button>
+    <button onclick="backToMainFromCharacterType()">↩️ Powrót</button>
+  </div>
+
+  <!-- USTAWIENIA -->
+  <div id="settingsMenu" class="menu">
+    <h2>⚙️ Ustawienia Gry</h2>
+    
+    <div class="setting-group">
+      <label>Poziom trudności:</label>
+      <select id="difficulty">
+        <option value="easy">🌱 Łatwy</option>
+        <option value="normal" selected>⚔️ Normalny</option>
+        <option value="hard">💀 Trudny</option>
+      </select>
+    </div>
+    
+    <br>
+    
+    <div class="setting-group">
+      <label>System strzelania:</label>
+      <select id="shootingMode">
+        <option value="auto" selected>🎯 Auto-strzelanie w najbliższego wroga</option>
+        <option value="mouse">🖱️ Strzelanie w myszkę</option>
+      </select>
+    </div>
+    
+    <br>
+    
+    <div class="setting-group">
+      <label>Głośność: </label>
+      <input type="range" id="volume" min="0" max="100" value="50">
+      <span id="volumeValue">50%</span>
+    </div>
+    
+    <br><br>
+    <button onclick="backToMenu()">↩️ Powrót do Menu</button>
+  </div>
+
+  <!-- INSTRUKCJA -->
+  <div id="instructionsMenu" class="menu">
+    <h2>📖 Instrukcja Gry</h2>
+    
+    <div class="instruction-section">
+      <h3>🎮 Sterowanie Gracz 1:</h3>
+      <p>W, S, A, D – poruszanie się</p>
+      <p>Spacja - Dash (w kierunku ruchu)</p>
+      <p>Auto-strzelanie w najbliższego wroga</p>
+      <p>ESC - Pauza</p>
+      <p>I - Ekwipunek</p>
+    </div>
+    
+    <div class="instruction-section">
+      <h3>🎮 Sterowanie Gracz 2:</h3>
+      <p>Strzałki – poruszanie się</p>
+      <p>Enter - Dash (w kierunku ruchu)</p>
+      <p>Auto-strzelanie w najbliższego wroga</p>
+    </div>
+    
+    <div class="instruction-section">
+      <h3>🎯 Cel gry:</h3>
+      <p>Przetrwaj kolejne fale przeciwników.</p>
+      <p>Zabijaj przeciwników, zbieraj kule doświadczenia i wybieraj karty ulepszeń.</p>
+      <p>Co 5 fal pojawia się boss i sklep z ulepszeniami.</p>
+    </div>
+    
+    <div class="instruction-section">
+      <h3>🌟 Postacie:</h3>
+      <p><strong>Kuza</strong> - Zbalansowany, pistolet</p>
+      <p><strong>Menel</strong> - Mocny, butelka, 5% krytyka</p>
+      <p><strong>Cygan</strong> - Szybki, nóż, 10% krytyka, kradzież XP</p>
+    </div>
+    
+    <button onclick="backToMenu()">↩️ Powrót do Menu</button>
+  </div>
+
+  <!-- HUD podczas gry -->
+  <div id="ui" class="hud">
+    <p id="waveInfo"></p>
+    <p id="stats"></p>
+    <p id="stats2"></p>
+    
+    <!-- Gracz 1 -->
+    <div class="player-hud">
+      <div class="bar-container">
+        <div class="health-bar">
+          <div class="bar-label">HP1</div>
+          <div class="bar-background">
+            <div class="bar-fill" id="healthFill"></div>
+          </div>
+          <div class="bar-text" id="healthText"></div>
+        </div>
+        <div class="xp-bar">
+          <div class="bar-label">XP1</div>
+          <div class="bar-background">
+            <div class="bar-fill" id="xpFill"></div>
+          </div>
+          <div class="bar-text" id="xpText"></div>
+        </div>
+        <div class="dash-bar">
+          <div class="bar-label">Dash</div>
+          <div class="bar-background">
+            <div class="bar-fill" id="dashFill"></div>
+          </div>
+          <div class="bar-text" id="dashText">1/1</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gracz 2 -->
+    <div class="player-hud" id="player2Bars" style="display: none;">
+      <div class="bar-container">
+        <div class="health-bar">
+          <div class="bar-label">HP2</div>
+          <div class="bar-background">
+            <div class="bar-fill" id="healthFill2"></div>
+          </div>
+          <div class="bar-text" id="healthText2"></div>
+        </div>
+        <div class="xp-bar">
+          <div class="bar-label">XP2</div>
+          <div class="bar-background">
+            <div class="bar-fill" id="xpFill2"></div>
+          </div>
+          <div class="bar-text" id="xpText2"></div>
+        </div>
+        <div class="dash-bar">
+          <div class="bar-label">Dash</div>
+          <div class="bar-background">
+            <div class="bar-fill" id="dashFill2"></div>
+          </div>
+          <div class="bar-text" id="dashText2">1/1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+  <!-- KONIEC GRY -->
+  <div id="gameOverMenu" class="menu">
+    <h2>💀 Koniec Gry</h2>
+    <p id="finalScore"></p>
+    <button onclick="backToMenu()">↩️ Powrót do Menu</button>
+  </div>
+
+  <!-- WYBÓR KART PO LEVELU -->
+  <div id="cardSelectionMenu" class="menu">
+    <h2>🎴 Wybierz Kartę</h2>
+    <div id="statsInfo" class="stats-info"></div>
+    <div id="cardContainer" class="card-container"></div>
+    <button id="rerollButton" onclick="rerollCards()">🔄 Przerzuć karty (10 złota)</button>
+  </div>
+
+  <!-- Menu pauzy -->
+  <div id="pauseMenu" class="pause-menu">
+    <h2>⏸️ Gra Zatrzymana</h2>
+    <div class="pause-buttons">
+      <button onclick="resumeGame()">▶️ Wznów Grę</button>
+      <button onclick="showSettings()">⚙️ Ustawienia</button>
+      <button onclick="backToMenu()">🚪 Wyjdź do Menu</button>
+    </div>
+  </div>
+
+  <!-- Ekwipunek -->
+  <div id="inventoryMenu" class="inventory-menu">
+    <h2>🎒 Ekwipunek</h2>
+    <div class="inventory-tabs">
+      <button class="inventory-tab active" onclick="switchInventoryTab('stats')">📊 Statystyki</button>
+      <button class="inventory-tab" onclick="switchInventoryTab('cards')">🃏 Karty</button>
+      <button class="inventory-tab" onclick="switchInventoryTab('items')">🎁 Przedmioty</button>
+    </div>
+    
+    <div id="statsTab" class="inventory-content active">
+      <div id="playerStats"></div>
+    </div>
+    
+    <div id="cardsTab" class="inventory-content">
+      <div id="collectedCards" class="inventory-grid"></div>
+    </div>
+    
+    <div id="itemsTab" class="inventory-content">
+      <div id="collectedItems" class="inventory-grid"></div>
+    </div>
+    
+    <button onclick="closeInventory()">❌ Zamknij</button>
+  </div>
+
+  <!-- Mini mapa -->
+  <div id="miniMap" class="mini-map">
+    <div class="mini-map-content" id="miniMapContent"></div>
+  </div>
+
+  <!-- Wyświetlacz fali -->
+  <div id="waveDisplay" class="wave-display" style="display: none;">
+    Fala: <span id="waveNumber">1</span>
+  </div>
+
+  <!-- CANVAS -->
+  <canvas id="game"></canvas>
+
+  <script src="game.js"></script>
+  
+  <script>
+    // Obsługa suwaka głośności
+    document.getElementById('volume').addEventListener('input', function() {
+      document.getElementById('volumeValue').textContent = this.value + '%';
+    });
+  </script>
+</body>
+</html>
